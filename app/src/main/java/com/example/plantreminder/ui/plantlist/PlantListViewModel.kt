@@ -7,6 +7,7 @@ import com.example.plantreminder.data.repository.PlantRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.util.Date
 
 class PlantListViewModel(private val repository: PlantRepository) : ViewModel() {
 
@@ -32,6 +33,24 @@ class PlantListViewModel(private val repository: PlantRepository) : ViewModel() 
     fun deletePlant(plant: Plant) {
         viewModelScope.launch {
             repository.deletePlant(plant)
+        }
+    }
+
+    fun updatePlant(plant: Plant) {
+        viewModelScope.launch {
+            repository.updatePlant(plant)
+        }
+    }
+
+    fun updateWateredDate(plant: Plant) {
+        viewModelScope.launch {
+            repository.updatePlant(plant.copy(lastWateredDate = Date()))
+        }
+    }
+
+    fun updateFertilizedDate(plant: Plant) {
+        viewModelScope.launch {
+            repository.updatePlant(plant.copy(lastFertilizedDate = Date()))
         }
     }
 }
